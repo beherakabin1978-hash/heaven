@@ -1,1 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Heaven World | Cracked Public Minecraft Server</title>
+  <meta name="description" content="Join Heaven World, a cracked public Minecraft server inspired by MCFleet and AppleMC style networks." />
+  <style>
+    :root {
+      --bg: #070a1a;
+      --card: #11162b;
+      --primary: #71c4ff;
+      --secondary: #8cffcf;
+      --text: #eef3ff;
+      --muted: #b8c0dc;
+      --danger: #ff7f7f;
+      --border: rgba(255, 255, 255, 0.16);
+    }
 
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Inter", "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      line-height: 1.6;
+      background:
+        radial-gradient(circle at 15% -5%, rgba(52, 82, 199, 0.45) 0, transparent 40%),
+        radial-gradient(circle at 90% 0%, rgba(16, 100, 78, 0.4) 0, transparent 35%),
+        #070a1a;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url("assets/heaven-world-poster.svg") center/cover no-repeat;
+      opacity: 0.09;
+      filter: blur(2px) saturate(1.2);
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 10, 26, 0.72);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(10px);
+      background: rgba(7, 10, 26, 0.72);
+      border-bottom: 1px solid var(--border);
+      z-index: 10;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.85rem 0;
+    }
+
+    .brand { font-weight: 800; letter-spacing: 0.4px; font-size: 1.15rem; }
+
+    .badge {
+      font-size: 0.72rem;
+      background: rgba(140, 255, 207, 0.18);
+      color: var(--secondary);
+      border: 1px solid rgba(140, 255, 207, 0.48);
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    .nav-links { display: flex; gap: 18px; font-size: 0.95rem; color: var(--muted); }
+    .nav-links a { text-decoration: none; color: inherit; }
+    .nav-links a:hover { color: var(--text); }
+
+    .hero {
+      padding: 84px 0 64px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .hero h1 { font-size: clamp(2rem, 4.5vw, 3.35rem); line-height: 1.12; margin: 0 0 12px; }
+    .hero p { font-size: 1.05rem; color: var(--muted); margin: 0 0 24px; max-width: 58ch; }
+
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+    button, .btn-link {
+      border: 1px solid transparent;
+      border-radius: 12px;
+      padding: 12px 18px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+      display: inline-block;
+    }
+
+    .btn-primary { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #081021; }
+    .btn-primary:hover { transform: translateY(-2px); }
+    .btn-ghost { background: transparent; color: var(--text); border-color: var(--border); }
+    .btn-ghost:hover { border-color: var(--primary); }
+
+    .hero-visual {
+      margin-top: 16px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+      max-width: 440px;
+      background: rgba(6, 9, 23, 0.85);
+    }
+
+    .hero-visual img { width: 100%; display: block; height: auto; }
+    .hero-visual figcaption {
+      font-size: 0.85rem;
+      color: var(--muted);
+      background: rgba(7, 10, 26, 0.9);
+      padding: 8px 10px;
+      border-top: 1px solid var(--border);
+    }
+
+    .card {
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.25);
+    }
+
+    .server-box code {
+      display: block;
+      margin-top: 10px;
+      font-size: 1.1rem;
+      background: rgba(0, 0, 0, 0.26);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px;
+      color: var(--secondary);
+      word-break: break-word;
+    }
+
+    .server-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; color: var(--muted); font-size: 0.9rem; }
+    section { padding: 22px 0 48px; }
+    h2 { margin: 0 0 10px; font-size: 1.6rem; }
+    .section-desc { color: var(--muted); margin: 0 0 18px; max-width: 68ch; }
+    .grid { display: grid; gap: 15px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+    .feature h3 { margin: 0 0 8px; font-size: 1.05rem; }
+    .feature p { margin: 0; color: var(--muted); font-size: 0.94rem; }
+
+    .notice { margin-top: 14px; color: var(--danger); font-weight: 600; font-size: 0.9rem; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding: 20px 0 35px;
+      margin-top: 20px;
+    }
+
+    .copied { color: var(--secondary); font-size: 0.9rem; min-height: 1.2em; margin-top: 9px; }
+
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">Heaven World <span class="badge">Cracked Public</span></div>
+      <nav class="nav-links" aria-label="Main links">
+        <a href="#features">Features</a>
+        <a href="ranks.html">Ranks</a>
+        <a href="#join">Join</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero" id="join">
+      <div>
+        <h1>Welcome to <span style="color: var(--primary)">Heaven World</span> — fast, fun, and open to everyone.</h1>
+        <p>
+          Heaven World is a <strong>cracked public Minecraft server</strong> inspired by clean network-style websites like MCFleet and AppleMC.
+          Jump into survival, events, and community gameplay without premium account restrictions.
+        </p>
+        <div class="cta-row">
+          <button class="btn-primary" id="copyIpBtn">Copy Server IP</button>
+          <a class="btn-link btn-ghost" href="ranks.html">View Ranks & Prices</a>
+        </div>
+        <p class="copied" id="copyStatus" aria-live="polite"></p>
+
+        <figure class="hero-visual" aria-label="Heaven World artwork">
+          <img src="assets/heaven-world-poster.svg" alt="Heaven World artwork with glowing tree and warrior" />
+          <figcaption>Official Heaven World art</figcaption>
+        </figure>
+      </div>
+
+      <aside class="card server-box" aria-label="Server details">
+        <h2 style="margin-top: 0">Server Connection</h2>
+        <p>Connect now and start your journey:</p>
+        <code id="ipText">Heaven_world.aternos.me:51018</code>
+        <div class="server-meta">
+          <div><strong>IP:</strong><br />Heaven_world.aternos.me:51018</div>
+          <div><strong>Port:</strong><br />51018</div>
+          <div><strong>Edition:</strong><br />Java / Cracked</div>
+          <div><strong>Status:</strong><br />Public</div>
+        </div>
+        <p class="notice">⚠️ This is a cracked public server. Play fair and follow community rules.</p>
+      </aside>
+    </section>
+
+    <section id="features">
+      <h2>Why play on Heaven World?</h2>
+      <p class="section-desc">Built for smooth gameplay and welcoming vibes, with a polished network look and easy access for all players.</p>
+      <div class="grid">
+        <article class="card feature">
+          <h3>🚀 Smooth Performance</h3>
+          <p>Optimized world settings and regular restarts for stable gameplay and low lag.</p>
+        </article>
+        <article class="card feature">
+          <h3>🤝 Friendly Community</h3>
+          <p>Public server with active moderation and respectful players across all skill levels.</p>
+        </article>
+        <article class="card feature">
+          <h3>🎮 Fun Events</h3>
+          <p>Weekly mini-events, loot challenges, and seasonal surprises with rank rewards.</p>
+        </article>
+        <article class="card feature">
+          <h3>🔓 Cracked Access</h3>
+          <p>Join without a premium launcher. Just connect and start exploring Heaven World.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      Heaven World © 2026 • Cracked Public Minecraft Server • IP: Heaven_world.aternos.me:51018
+    </div>
+  </footer>
+
+  <script>
+    const copyBtn = document.getElementById('copyIpBtn');
+    const copyStatus = document.getElementById('copyStatus');
+    const ip = 'Heaven_world.aternos.me:51018';
+
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(ip);
+        copyStatus.textContent = `Copied! ${ip}`;
+      } catch (error) {
+        copyStatus.textContent = 'Could not copy automatically. Please copy from the server box.';
+      }
+    });
+  </script>
+</body>
+</html>

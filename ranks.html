@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Heaven World Ranks | Store</title>
+  <meta name="description" content="Choose your Heaven World rank. Click any rank card to open its dedicated details page." />
+  <style>
+    :root {
+      --line: rgba(126, 180, 255, 0.22);
+      --text: #e9f2ff;
+      --muted: #a9bbd8;
+      --green: #64f36d;
+      --gold: #ffcf70;
+      --panel-top: rgba(20, 42, 69, 0.92);
+      --panel-bottom: rgba(11, 25, 42, 0.92);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Inter", "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% -5%, rgba(67, 109, 255, 0.35) 0, transparent 36%),
+        radial-gradient(circle at 95% 0%, rgba(34, 199, 255, 0.2) 0, transparent 30%),
+        #040b17;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url("assets/heaven-world-poster.svg") center/cover no-repeat;
+      opacity: 0.1;
+      filter: blur(2px) saturate(1.2);
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 10, 22, 0.72);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .container { width: min(1180px, 94vw); margin: 0 auto; }
+
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(10px);
+      background: rgba(5, 12, 25, 0.75);
+      border-bottom: 1px solid var(--line);
+      z-index: 5;
+    }
+
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: 0.95rem 0; }
+    .brand { font-size: 1.15rem; font-weight: 800; }
+    .links { display: flex; gap: 1rem; }
+    .links a {
+      color: var(--muted);
+      text-decoration: none;
+      padding: 0.35rem 0.6rem;
+      border-radius: 8px;
+      transition: 0.2s ease;
+    }
+    .links a:hover { color: var(--text); background: rgba(80, 140, 255, 0.12); }
+
+    main { padding: 3rem 0 3.5rem; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 1.2rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, var(--panel-top), var(--panel-bottom));
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 1.25rem;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+    }
+
+    h1 { margin: 0 0 .55rem; font-size: clamp(1.9rem, 4vw, 2.8rem); }
+    .muted { color: var(--muted); margin: 0; }
+
+    .art {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: rgba(8, 17, 30, 0.75);
+      display: flex;
+      flex-direction: column;
+    }
+    .art img { width: 100%; display: block; }
+    .art p { margin: 0; padding: .65rem .8rem; color: var(--muted); font-size: .87rem; }
+
+    .rank-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(150px, 1fr));
+      gap: .8rem;
+      margin-top: .9rem;
+    }
+
+    .rank-card {
+      text-decoration: none;
+      color: var(--text);
+      background: linear-gradient(180deg, #173252, #102640);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: .9rem;
+      display: grid;
+      gap: .55rem;
+      text-align: center;
+      cursor: pointer;
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .rank-card::before {
+      content: "";
+      position: absolute;
+      inset: -40% -10% auto;
+      height: 45%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.13), transparent);
+      transform: translateX(-120%) rotate(-10deg);
+      transition: transform 0.6s ease;
+    }
+
+    .rank-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(134, 190, 255, 0.45);
+      box-shadow: 0 12px 24px rgba(0,0,0,.3);
+    }
+
+    .rank-card:hover::before { transform: translateX(120%) rotate(-10deg); }
+
+    .badge {
+      width: 66px;
+      height: 66px;
+      border-radius: 16px;
+      margin: 0 auto;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(7, 16, 30, .7);
+    }
+
+    .vip { color: #f6b347; }
+    .vip-plus { color: #d7dce9; }
+    .mvp { color: #ffe27f; }
+    .mvp-plus { color: #66f29b; }
+    .god { color: #76e0ff; }
+
+    .rank-name { font-weight: 800; }
+    .rank-price { color: var(--gold); font-weight: 700; }
+    .rank-cta {
+      background: var(--green);
+      color: #04200b;
+      font-weight: 800;
+      border-radius: 8px;
+      padding: .45rem .5rem;
+      font-size: .9rem;
+    }
+
+    .table-wrap {
+      margin-top: 1rem;
+      overflow-x: auto;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 840px;
+      background: linear-gradient(180deg, rgba(16, 35, 58, 0.95), rgba(9, 22, 38, 0.95));
+    }
+
+    th, td {
+      border-bottom: 1px solid rgba(126, 180, 255, 0.14);
+      padding: .85rem .75rem;
+      text-align: center;
+    }
+    th:first-child, td:first-child { text-align: left; font-weight: 700; }
+    thead th {
+      background: rgba(9, 22, 39, 0.8);
+      font-size: .85rem;
+      color: #b8d8ff;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+    }
+
+    .ok { color: var(--green); font-weight: 800; }
+    .no { color: #ff6d7f; font-weight: 800; }
+
+    .note { margin-top: .9rem; color: var(--muted); font-size: .92rem; }
+
+    footer {
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      text-align: center;
+      padding: 1rem 0 2rem;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 1020px) {
+      .hero { grid-template-columns: 1fr; }
+      .rank-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+    }
+    @media (max-width: 780px) {
+      .links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">Heaven World Store</div>
+      <nav class="links" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="ranks.html">Ranks</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="panel">
+        <h1>Choose Your Rank</h1>
+        <p class="muted">Click any rank card to jump to that rank screen. Every rank has its own dedicated page now.</p>
+
+        <div class="rank-grid">
+          <a class="rank-card" href="rank-vip.html"><div class="badge vip">VIP</div><div class="rank-name">VIP</div><div class="rank-price">₹99</div><div class="rank-cta">View Rank</div></a>
+          <a class="rank-card" href="rank-vip-plus.html"><div class="badge vip-plus">VIP+</div><div class="rank-name">VIP+</div><div class="rank-price">₹399</div><div class="rank-cta">View Rank</div></a>
+          <a class="rank-card" href="rank-mvp.html"><div class="badge mvp">MVP</div><div class="rank-name">MVP</div><div class="rank-price">₹699</div><div class="rank-cta">View Rank</div></a>
+          <a class="rank-card" href="rank-mvp-plus.html"><div class="badge mvp-plus">MVP+</div><div class="rank-name">MVP+</div><div class="rank-price">₹1999</div><div class="rank-cta">View Rank</div></a>
+          <a class="rank-card" href="rank-god.html"><div class="badge god">GOD</div><div class="rank-name">GOD</div><div class="rank-price">₹4299</div><div class="rank-cta">View Rank</div></a>
+        </div>
+      </div>
+
+      <figure class="art panel">
+        <img src="assets/heaven-world-poster.svg" alt="Heaven World poster" />
+        <p>Final texture pass: dark blue glass look + bright clickable cards like your reference style.</p>
+      </figure>
+    </section>
+
+    <section class="panel">
+      <h2 style="margin:0 0 .6rem;">Rank Comparison</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Feature</th><th>VIP</th><th>VIP+</th><th>MVP</th><th>MVP+</th><th>GOD</th></tr></thead>
+          <tbody>
+            <tr><td>Homes</td><td class="ok">2</td><td class="ok">3</td><td class="ok">5</td><td class="ok">10</td><td class="ok">50</td></tr>
+            <tr><td>Auction Limit</td><td class="ok">2</td><td class="ok">3</td><td class="ok">5</td><td class="ok">10</td><td class="ok">50</td></tr>
+            <tr><td>Warp Limit</td><td class="ok">2</td><td class="ok">3</td><td class="ok">5</td><td class="ok">7</td><td class="ok">10</td></tr>
+            <tr><td>Ranked Kit</td><td class="no">✕</td><td class="ok">✓</td><td class="ok">✓</td><td class="ok">✓</td><td class="ok">✓</td></tr>
+            <tr><td>Bypass Cooldown</td><td class="no">✕</td><td class="no">✕</td><td class="no">✕</td><td class="no">✕</td><td class="ok">✓</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Tip: click any rank card above to open a dedicated rank screen.</p>
+    </section>
+  </main>
+
+  <footer>
+    Heaven World © 2026 • Cracked Public Server Store
+  </footer>
+</body>
+</html>
