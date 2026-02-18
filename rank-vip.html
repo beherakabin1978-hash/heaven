@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIP Rank | Heaven World</title>
+  <style>
+    :root { --text:#eaf2ff; --muted:#a7bddf; --line:rgba(126,180,255,.24); --green:#64f36d; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:Inter,Segoe UI,Arial,sans-serif; color:var(--text); background:radial-gradient(circle at 20% -5%, rgba(67,109,255,.35) 0, transparent 36%), #040b17; min-height:100vh; position:relative; }
+    body::before { content:""; position:fixed; inset:0; background:url("assets/heaven-world-poster.svg") center/cover no-repeat; opacity:.1; filter:blur(2px); z-index:-2; }
+    body::after { content:""; position:fixed; inset:0; background:rgba(4,10,22,.72); z-index:-1; }
+    header { position:sticky; top:0; backdrop-filter:blur(10px); background:rgba(5,12,25,.75); border-bottom:1px solid var(--line); }
+    .nav { width:min(1000px,92vw); margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:.85rem 0; }
+    .brand { font-weight:800; }
+    .nav a { color:var(--muted); text-decoration:none; margin-left:.8rem; }
+    .nav a:hover { color:var(--text); }
+    .container { width:min(1000px,92vw); margin:0 auto; padding:2rem 0; }
+    .panel { background:linear-gradient(180deg, rgba(20,42,69,.94), rgba(11,25,42,.94)); border:1px solid var(--line); border-radius:18px; padding:1.2rem; box-shadow:0 16px 40px rgba(0,0,0,.28); }
+    .head { display:flex; justify-content:space-between; gap:1rem; align-items:center; flex-wrap:wrap; }
+    .tag { padding:.35rem .6rem; border-radius:999px; border:1px solid var(--line); font-weight:800; color:#f6b347; }
+    .price { font-size:2.2rem; font-weight:900; color:#ffcf70; margin:.3rem 0; }
+    .buy { display:inline-block; text-decoration:none; background:var(--green); color:#06240d; font-weight:900; border-radius:10px; padding:.7rem 1rem; }
+    ul { margin:.7rem 0 0; padding-left:1.2rem; color:var(--muted); }
+    .links { margin-top:1rem; display:flex; gap:.7rem; flex-wrap:wrap; }
+    .links a { color:var(--muted); text-decoration:none; border:1px solid var(--line); padding:.55rem .7rem; border-radius:10px; }
+    .links a:hover { color:var(--text); border-color:rgba(255,255,255,.35); }
+    .poster { max-width:280px; border-radius:14px; border:1px solid var(--line); overflow:hidden; }
+    .poster img { display:block; width:100%; }
+    footer { border-top:1px solid var(--line); color:var(--muted); text-align:center; padding:1rem 0 1.6rem; font-size:.9rem; margin-top:1.4rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand">Heaven World VIP</div>
+      <nav><a href="index.html">Home</a><a href="ranks.html">All Ranks</a></nav>
+    </div>
+  </header>
+  <main class="container">
+    <section class="panel">
+      <div class="head">
+        <div>
+          <div class="tag">VIP Rank</div>
+          <h1>VIP</h1>
+          <p style="color:var(--muted);margin:0;">Starter premium rank for Heaven World players.</p>
+          <p class="price">₹99</p>
+          <a class="buy" href="ranks.html">Add to cart</a>
+        </div>
+        <figure class="poster"><img src="assets/heaven-world-poster.svg" alt="Heaven World art" /></figure>
+      </div>
+      <h2>Perks</h2>
+      <ul>
+        <li>2 homes</li>
+        <li>Auction limit 2</li>
+        <li>Warp limit 2</li>
+        <li>Colored chat name</li>
+      </ul>
+      <div class="links">
+        <a href="ranks.html">← All Ranks</a>
+        
+        <a href="rank-vip-plus.html">Next: VIP+</a>
+      </div>
+    </section>
+  </main>
+  <footer>Heaven World © 2026 • Rank Details</footer>
+</body>
+</html>
